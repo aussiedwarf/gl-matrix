@@ -27,6 +27,7 @@ var glMatrix = {};
 // Configuration Constants
 glMatrix.EPSILON = 0.000001;
 glMatrix.ARRAY_TYPE = (typeof Float32Array !== 'undefined') ? Float32Array : Array;
+glMatrix.ARRAY_TYPE_D = (typeof Float64Array !== 'undefined') ? Float64Array : Array;
 glMatrix.RANDOM = Math.random;
 glMatrix.ENABLE_SIMD = false;
 
