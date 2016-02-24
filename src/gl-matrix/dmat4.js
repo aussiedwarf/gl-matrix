@@ -533,7 +533,6 @@ dmat4.SIMD.translate = function (out, a, v) {
  */
 dmat4.translate = glMatrix.USE_SIMD ? dmat4.SIMD.translate : dmat4.scalar.translate;
 
-
 /**
  * Scales the dmat4 by the dimensions in the given vec3
  *
@@ -657,7 +656,7 @@ dmat4.rotate = function (out, a, rad, axis) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {dmat4} out
  */
-dmat4.rotateX = function (out, a, rad) {
+dmat4.scalar.rotateX = function (out, a, rad) {
     var s = Math.sin(rad),
         c = Math.cos(rad),
         a10 = a[4],
@@ -693,6 +692,29 @@ dmat4.rotateX = function (out, a, rad) {
 };
 
 /**
+ * Rotates a matrix by the given angle around the X axis using SIMD
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the matrix to rotate
+ * @param {Number} rad the angle to rotate the matrix by
+ * @returns {dmat4} out
+ */
+dmat4.SIMD.rotateX = function (out, a, rad) {
+
+};
+
+/**
+ * Rotates a matrix by the given angle around the X axis using SIMD if availabe and enabled
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the matrix to rotate
+ * @param {Number} rad the angle to rotate the matrix by
+ * @returns {dmat4} out
+ */
+dmat4.rotateX = glMatrix.USE_SIMD ? dmat4.SIMD.rotateX : dmat4.scalar.rotateX;
+
+
+/**
  * Rotates a matrix by the given angle around the Y axis
  *
  * @param {dmat4} out the receiving matrix
@@ -700,7 +722,7 @@ dmat4.rotateX = function (out, a, rad) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {dmat4} out
  */
-dmat4.rotateY = function (out, a, rad) {
+dmat4.scalar.rotateY = function (out, a, rad) {
     var s = Math.sin(rad),
         c = Math.cos(rad),
         a00 = a[0],
@@ -734,6 +756,28 @@ dmat4.rotateY = function (out, a, rad) {
     out[11] = a03 * s + a23 * c;
     return out;
 };
+
+/**
+ * Rotates a matrix by the given angle around the Y axis using SIMD
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the matrix to rotate
+ * @param {Number} rad the angle to rotate the matrix by
+ * @returns {dmat4} out
+ */
+dmat4.SIMD.rotateY = function (out, a, rad) {
+
+};
+
+/**
+ * Rotates a matrix by the given angle around the Y axis if SIMD available and enabled
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the matrix to rotate
+ * @param {Number} rad the angle to rotate the matrix by
+ * @returns {dmat4} out
+ */
+ dmat4.rotateY = glMatrix.USE_SIMD ? dmat4.SIMD.rotateY : dmat4.scalar.rotateY;
 
 /**
  * Rotates a matrix by the given angle around the Z axis
@@ -777,6 +821,28 @@ dmat4.rotateZ = function (out, a, rad) {
     out[7] = a13 * c - a03 * s;
     return out;
 };
+
+/**
+ * Rotates a matrix by the given angle around the Z axis using SIMD
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the matrix to rotate
+ * @param {Number} rad the angle to rotate the matrix by
+ * @returns {dmat4} out
+ */
+dmat4.SIMD.rotateZ = function (out, a, rad) {
+
+};
+
+/**
+ * Rotates a matrix by the given angle around the Z axis if SIMD available and enabled
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the matrix to rotate
+ * @param {Number} rad the angle to rotate the matrix by
+ * @returns {dmat4} out
+ */
+ dmat4.rotateZ = glMatrix.USE_SIMD ? dmat4.SIMD.rotateZ : dmat4.scalar.rotateZ;
 
 /**
  * Creates a matrix from a vector translation
