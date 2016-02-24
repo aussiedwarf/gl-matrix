@@ -550,4 +550,22 @@ dquat.str = function (a) {
     return 'dquat(' + a[0] + ', ' + a[1] + ', ' + a[2] + ', ' + a[3] + ')';
 };
 
+/**
+ * Returns whether or not the quaternions have exactly the same elements in the same position (when compared with ===)
+ *
+ * @param {dquat} a The first quaternion.
+ * @param {dquat} b The second quaternion.
+ * @returns {Boolean} True if the vectors are equal, false otherwise.
+ */
+dquat.exactEquals = dvec4.exactEquals;
+
+/**
+ * Returns whether or not the quaternions have approximately the same elements in the same position.
+ *
+ * @param {dquat} a The first vector.
+ * @param {dquat} b The second vector.
+ * @returns {Boolean} True if the vectors are equal, false otherwise.
+ */
+dquat.equals = dvec4.equals;
+
 module.exports = dquat;
