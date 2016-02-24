@@ -85,6 +85,42 @@ dmat2.identity = function(out) {
 };
 
 /**
+ * Create a new dmat2 with the given values
+ *
+ * @param {Number} m00 Component in column 0, row 0 position (index 0)
+ * @param {Number} m01 Component in column 0, row 1 position (index 1)
+ * @param {Number} m10 Component in column 1, row 0 position (index 2)
+ * @param {Number} m11 Component in column 1, row 1 position (index 3)
+ * @returns {dmat2} out A new 2x2 matrix
+ */
+dmat2.fromValues = function(m00, m01, m10, m11) {
+    var out = new glMatrix.ARRAY_TYPE_D(4);
+    out[0] = m00;
+    out[1] = m01;
+    out[2] = m10;
+    out[3] = m11;
+    return out;
+};
+
+/**
+ * Set the components of a mat2 to the given values
+ *
+ * @param {dmat2} out the receiving matrix
+ * @param {Number} m00 Component in column 0, row 0 position (index 0)
+ * @param {Number} m01 Component in column 0, row 1 position (index 1)
+ * @param {Number} m10 Component in column 1, row 0 position (index 2)
+ * @param {Number} m11 Component in column 1, row 1 position (index 3)
+ * @returns {dmat2} out
+ */
+dmat2.set = function(out, m00, m01, m10, m11) {
+    out[0] = m00;
+    out[1] = m01;
+    out[2] = m10;
+    out[3] = m11;
+    return out;
+};
+
+/**
  * Transpose the values of a dmat2
  *
  * @param {dmat2} out the receiving matrix
