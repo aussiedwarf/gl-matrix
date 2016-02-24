@@ -142,7 +142,7 @@ dmat4.identity = function(out) {
  * @param {dmat4} a the source matrix
  * @returns {dmat4} out
  */
-dmat4.transpose = function(out, a) {
+dmat4.scalar.transpose = function(out, a) {
     // If we are transposing ourselves we can skip a few steps but have to cache some values
     if (out === a) {
         var a01 = a[1], a02 = a[2], a03 = a[3],
@@ -184,13 +184,34 @@ dmat4.transpose = function(out, a) {
 };
 
 /**
+ * Transpose the values of a dmat4 using SIMD
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the source matrix
+ * @returns {dmat4} out
+ */
+dmat4.SIMD.transpose = function(out, a) {
+
+};
+
+/**
+ * Transpse a mat4 using SIMD if available and enabled
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the source matrix
+ * @returns {dmat4} out
+ */
+dmat4.transpose = glMatrix.USE_SIMD ? dmat4.SIMD.transpose : dmat4.scalar.transpose;
+
+
+/**
  * Inverts a dmat4
  *
  * @param {dmat4} out the receiving matrix
  * @param {dmat4} a the source matrix
  * @returns {dmat4} out
  */
-dmat4.invert = function(out, a) {
+dmat4.scalar.invert = function(out, a) {
     var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
         a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
         a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
@@ -238,13 +259,33 @@ dmat4.invert = function(out, a) {
 };
 
 /**
+ * Inverts a dmat4 using SIMD
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the source matrix
+ * @returns {dmat4} out
+ */
+dmat4.SIMD.invert = function(out, a) {
+
+};
+
+/**
+ * Inverts a dmat4 using SIMD if available and enabled
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the source matrix
+ * @returns {dmat4} out
+ */
+dmat4.invert = glMatrix.USE_SIMD ? dmat4.SIMD.invert : dmat4.scalar.invert;
+
+/**
  * Calculates the adjugate of a dmat4
  *
  * @param {dmat4} out the receiving matrix
  * @param {dmat4} a the source matrix
  * @returns {dmat4} out
  */
-dmat4.adjoint = function(out, a) {
+dmat4.scalar.adjoint = function(out, a) {
     var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
         a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
         a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
@@ -268,6 +309,27 @@ dmat4.adjoint = function(out, a) {
     out[15] =  (a00 * (a11 * a22 - a12 * a21) - a10 * (a01 * a22 - a02 * a21) + a20 * (a01 * a12 - a02 * a11));
     return out;
 };
+
+/**
+ * Calculates the adjugate of a dmat4 using SIMD
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the source matrix
+ * @returns {dmat4} out
+ */
+dmat4.SIMD.adjoint = function(out, a) {
+
+};
+
+/**
+ * Calculates the adjugate of a dmat4 using SIMD if available and enabled
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the source matrix
+ * @returns {dmat4} out
+ */
+ dmat4.adjoint = glMatrix.USE_SIMD ? dmat4.SIMD.adjoint : dmat4.scalar.adjoint;
+
 
 /**
  * Calculates the determinant of a dmat4
@@ -417,10 +479,10 @@ dmat4.mul = dmat4.multiply;
  *
  * @param {dmat4} out the receiving matrix
  * @param {dmat4} a the matrix to translate
- * @param {vec3} v vector to translate by
+ * @param {dvec3} v vector to translate by
  * @returns {dmat4} out
  */
-dmat4.translate = function (out, a, v) {
+dmat4.scalar.translate = function (out, a, v) {
     var x = v[0], y = v[1], z = v[2],
         a00, a01, a02, a03,
         a10, a11, a12, a13,
@@ -450,6 +512,29 @@ dmat4.translate = function (out, a, v) {
 };
 
 /**
+ * Translates a dmat4 by the given vector using SIMD
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the matrix to translate
+ * @param {dvec3} v vector to translate by
+ * @returns {dmat4} out
+ */
+dmat4.SIMD.translate = function (out, a, v) {
+
+};
+
+/**
+ * Translates a dmat4 by the given vector using SIMD if available and enabled
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the matrix to translate
+ * @param {dvec3} v vector to translate by
+ * @returns {dmat4} out
+ */
+dmat4.translate = glMatrix.USE_SIMD ? dmat4.SIMD.translate : dmat4.scalar.translate;
+
+
+/**
  * Scales the dmat4 by the dimensions in the given vec3
  *
  * @param {dmat4} out the receiving matrix
@@ -457,7 +542,7 @@ dmat4.translate = function (out, a, v) {
  * @param {vec3} v the vec3 to scale the matrix by
  * @returns {dmat4} out
  **/
-dmat4.scale = function(out, a, v) {
+dmat4.scalar.scale = function(out, a, v) {
     var x = v[0], y = v[1], z = v[2];
 
     out[0] = a[0] * x;
@@ -478,6 +563,28 @@ dmat4.scale = function(out, a, v) {
     out[15] = a[15];
     return out;
 };
+
+/**
+ * Scales the dmat4 by the dimensions in the given dvec3 using vectorization
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the matrix to scale
+ * @param {dvec3} v the vec3 to scale the matrix by
+ * @returns {dmat4} out
+ **/
+dmat4.SIMD.scale = function(out, a, v) {
+
+};
+
+/**
+ * Scales the dmat4 by the dimensions in the given dvec3 using SIMD if available and enabled
+ *
+ * @param {dmat4} out the receiving matrix
+ * @param {dmat4} a the matrix to scale
+ * @param {dvec3} v the dvec3 to scale the matrix by
+ * @returns {dmat4} out
+ */
+dmat4.scale = glMatrix.USE_SIMD ? dmat4.SIMD.scale : dmat4.scalar.scale;
 
 /**
  * Rotates a dmat4 by the given angle around the given axis
@@ -742,7 +849,7 @@ dmat4.fromScaling = function(out, v) {
  *
  * @param {dmat4} out dmat4 receiving operation result
  * @param {Number} rad the angle to rotate the matrix by
- * @param {vec3} axis the axis to rotate around
+ * @param {dvec3} axis the axis to rotate around
  * @returns {dmat4} out
  */
 dmat4.fromRotation = function(out, rad, axis) {
