@@ -665,4 +665,47 @@ dmat3.subtract = function(out, a, b) {
  */
 dmat3.sub = dmat3.subtract;
 
+/**
+ * Multiply each element of the matrix by a scalar.
+ *
+ * @param {dmat3} out the receiving matrix
+ * @param {dmat3} a the matrix to scale
+ * @param {Number} b amount to scale the matrix's elements by
+ * @returns {dmat3} out
+ */
+dmat3.multiplyScalar = function(out, a, b) {
+    out[0] = a[0] * b;
+    out[1] = a[1] * b;
+    out[2] = a[2] * b;
+    out[3] = a[3] * b;
+    out[4] = a[4] * b;
+    out[5] = a[5] * b;
+    out[6] = a[6] * b;
+    out[7] = a[7] * b;
+    out[8] = a[8] * b;
+    return out;
+};
+
+/**
+ * Adds two dmat3's after multiplying each element of the second operand by a scalar value.
+ *
+ * @param {dmat3} out the receiving vector
+ * @param {dmat3} a the first operand
+ * @param {dmat3} b the second operand
+ * @param {Number} scale the amount to scale b's elements by before adding
+ * @returns {dmat3} out
+ */
+dmat3.multiplyScalarAndAdd = function(out, a, b, scale) {
+    out[0] = a[0] + (b[0] * scale);
+    out[1] = a[1] + (b[1] * scale);
+    out[2] = a[2] + (b[2] * scale);
+    out[3] = a[3] + (b[3] * scale);
+    out[4] = a[4] + (b[4] * scale);
+    out[5] = a[5] + (b[5] * scale);
+    out[6] = a[6] + (b[6] * scale);
+    out[7] = a[7] + (b[7] * scale);
+    out[8] = a[8] + (b[8] * scale);
+    return out;
+};
+
 module.exports = dmat3;
