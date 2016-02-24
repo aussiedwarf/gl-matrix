@@ -1438,7 +1438,7 @@ dmat4.perspective = function (out, fovy, aspect, near, far) {
  * with the still experiemental WebVR API.
  *
  * @param {dmat4} out dmat4 frustum matrix will be written into
- * @param {number} fov Object containing the following values: upDegrees, downDegrees, leftDegrees, rightDegrees
+ * @param {Object} fov Object containing the following values: upDegrees, downDegrees, leftDegrees, rightDegrees
  * @param {number} near Near bound of the frustum
  * @param {number} far Far bound of the frustum
  * @returns {dmat4} out
