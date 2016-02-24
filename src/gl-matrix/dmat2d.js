@@ -314,4 +314,47 @@ dmat2d.frob = function (a) {
     return(Math.sqrt(Math.pow(a[0], 2) + Math.pow(a[1], 2) + Math.pow(a[2], 2) + Math.pow(a[3], 2) + Math.pow(a[4], 2) + Math.pow(a[5], 2) + 1))
 }; 
 
+
+/**
+ * Adds two dmat2d's
+ *
+ * @param {dmat2d} out the receiving matrix
+ * @param {dmat2d} a the first operand
+ * @param {dmat2d} b the second operand
+ * @returns {dmat2d} out
+ */
+dmat2d.add = function(out, a, b) {
+    out[0] = a[0] + b[0];
+    out[1] = a[1] + b[1];
+    out[2] = a[2] + b[2];
+    out[3] = a[3] + b[3];
+    out[4] = a[4] + b[4];
+    out[5] = a[5] + b[5];
+    return out;
+};
+
+/**
+ * Subtracts matrix b from matrix a
+ *
+ * @param {dmat2d} out the receiving matrix
+ * @param {dmat2d} a the first operand
+ * @param {dmat2d} b the second operand
+ * @returns {dmat2d} out
+ */
+dmat2d.subtract = function(out, a, b) {
+    out[0] = a[0] - b[0];
+    out[1] = a[1] - b[1];
+    out[2] = a[2] - b[2];
+    out[3] = a[3] - b[3];
+    out[4] = a[4] - b[4];
+    out[5] = a[5] - b[5];
+    return out;
+};
+
+/**
+ * Alias for {@link dmat2d.subtract}
+ * @function
+ */
+dmat2d.sub = dmat2d.subtract;
+
 module.exports = dmat2d;

@@ -49,7 +49,7 @@ dmat3.create = function() {
  * Copies the upper-left 3x3 values into the given dmat3.
  *
  * @param {dmat3} out the receiving 3x3 matrix
- * @param {mat4} a   the source 4x4 matrix
+ * @param {dmat4} a   the source 4x4 matrix
  * @returns {dmat3} out
  */
 dmat3.fromMat4 = function(out, a) {
@@ -561,5 +561,52 @@ dmat3.frob = function (a) {
     return(Math.sqrt(Math.pow(a[0], 2) + Math.pow(a[1], 2) + Math.pow(a[2], 2) + Math.pow(a[3], 2) + Math.pow(a[4], 2) + Math.pow(a[5], 2) + Math.pow(a[6], 2) + Math.pow(a[7], 2) + Math.pow(a[8], 2)))
 };
 
+/**
+ * Adds two dmat3's
+ *
+ * @param {dmat3} out the receiving matrix
+ * @param {dmat3} a the first operand
+ * @param {dmat3} b the second operand
+ * @returns {dmat3} out
+ */
+dmat3.add = function(out, a, b) {
+    out[0] = a[0] + b[0];
+    out[1] = a[1] + b[1];
+    out[2] = a[2] + b[2];
+    out[3] = a[3] + b[3];
+    out[4] = a[4] + b[4];
+    out[5] = a[5] + b[5];
+    out[6] = a[6] + b[6];
+    out[7] = a[7] + b[7];
+    out[8] = a[8] + b[8];
+    return out;
+};
+
+/**
+ * Subtracts matrix b from matrix a
+ *
+ * @param {dmat3} out the receiving matrix
+ * @param {dmat3} a the first operand
+ * @param {dmat3} b the second operand
+ * @returns {dmat3} out
+ */
+dmat3.subtract = function(out, a, b) {
+    out[0] = a[0] - b[0];
+    out[1] = a[1] - b[1];
+    out[2] = a[2] - b[2];
+    out[3] = a[3] - b[3];
+    out[4] = a[4] - b[4];
+    out[5] = a[5] - b[5];
+    out[6] = a[6] - b[6];
+    out[7] = a[7] - b[7];
+    out[8] = a[8] - b[8];
+    return out;
+};
+
+/**
+ * Alias for {@link dmat3.subtract}
+ * @function
+ */
+dmat3.sub = dmat3.subtract;
 
 module.exports = dmat3;
